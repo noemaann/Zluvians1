@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout>
+  <header>
+    <div class="header-eyebrow">Zulu Block · 2025–2026</div>
+    <h1>ZULU<br><em>Memories</em></h1>
+    <p>53 souls. One block. Endless stories.</p>
+  </header>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-num" data-target="53" data-suffix="">0</span>
+      <span class="stat-label">Hostelites</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" data-target="3" data-suffix="">0</span>
+      <span class="stat-label">Committees</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" data-target="365" data-suffix="+">0</span>
+      <span class="stat-label">Days Together</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" data-target="99" data-suffix="∞">0</span>
+      <span class="stat-label">Memories</span>
+    </div>
+  </div>
+
+  <!-- Hero Feature Images -->
+  <div class="hero-images">
+    <div class="hero-img-item" style="min-height: 480px;">
+      <img src="https://picsum.photos/900/700?random=301" alt="Zulu Block Feature">
+      <span class="hero-img-badge">Zulu Block</span>
+    </div>
+    <div class="hero-img-item" style="min-height: 228px;">
+      <img src="https://picsum.photos/700/500?random=302" alt="The Brotherhood">
+      <span class="hero-img-badge">The Brotherhood</span>
+    </div>
+    <div class="hero-img-item" style="min-height: 228px;">
+      <img src="https://picsum.photos/700/500?random=303" alt="2025–26">
+      <span class="hero-img-badge">2025–26</span>
+    </div>
+  </div>
+
+  <div class="container">
+    <section class="quotes-section">
+      <div class="section-label">
+        <h2>Memorable Quotes</h2>
+      </div>
+      <div class="quotes-grid">
+        <div class="quote-card">
+          <p>"Edaa, Nammukk onnu kulichaalo"</p>
+          <span>— Shon Koothi</span>
+        </div>
+        <div class="quote-card">
+          <p>"Soapy slipping chaos will never be forgotten."</p>
+          <span>— Block B Legends</span>
+        </div>
+        <div class="quote-card">
+          <p>"Who turned off the WiFi at 2 AM?!"</p>
+          <span>— Kambi Sura</span>
+        </div>
+        <div class="quote-card">
+          <p>"Surviving on instant noodles for a straight week."</p>
+          <span>— Exam Warriors</span>
+        </div>
+        <div class="quote-card">
+          <p>"If you are bad, I am your dad."</p>
+          <span>— Alphonse NJ</span>
+        </div>
+        <div class="quote-card">
+          <p>"Anvarinte Andi"</p>
+          <span>— Padakkam Basim</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="images-section">
+      <div class="section-label">
+        <h2>Photo Gallery</h2>
+      </div>
+      <div class="images-grid">
+        <div class="image-card"><img loading="lazy" src="https://picsum.photos/800/600?random=1" alt="Zulu Memory 1"></div>
+        <div class="image-card"><img loading="lazy" src="https://picsum.photos/800/600?random=2" alt="Zulu Memory 2"></div>
+        <div class="image-card"><img loading="lazy" src="https://picsum.photos/800/600?random=3" alt="Zulu Memory 3"></div>
+        <div class="image-card"><img loading="lazy" src="https://picsum.photos/800/600?random=4" alt="Zulu Memory 4"></div>
+        <div class="image-card"><img loading="lazy" src="https://picsum.photos/800/600?random=5" alt="Zulu Memory 5"></div>
+        <div class="image-card"><img loading="lazy" src="https://picsum.photos/800/600?random=6" alt="Zulu Memory 6"></div>
+      </div>
+    </section>
+  </div>
+  
+  <script>
+    document.addEventListener("astro:page-load", () => {
+      document.querySelectorAll('.stat-num[data-target]').forEach(el => {
+        const spanEl = el as HTMLSpanElement;
+        const target = parseInt(spanEl.dataset.target || "0");
+        const obs = new IntersectionObserver(entries => {
+          if (entries[0].isIntersecting) {
+            let count = 0;
+            const step = Math.ceil(target / 60);
+            const timer = setInterval(() => {
+              count = Math.min(count + step, target);
+              spanEl.textContent = count + (spanEl.dataset.suffix || '');
+              if (count >= target) clearInterval(timer);
+            }, 25);
+            obs.unobserve(spanEl);
+          }
+        });
+        obs.observe(spanEl);
+      });
+    });
+  </script>
+</BaseLayout>

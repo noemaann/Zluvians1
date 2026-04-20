@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { mateNames } from '../data/matesData.js';
+---
+
+<BaseLayout title="Hostel Mates — Zulu Memories">
+  <div class="container" style="padding-top: 140px; min-height: 100vh;">
+    <div class="section-label">
+      <h2>Hostel Mates</h2>
+    </div>
+    <div class="mates-grid" id="matesGrid">
+      {mateNames.map((name, index) => {
+        const i = index + 1;
+        const encodedName = encodeURIComponent(name);
+        // Using public/DP's correctly relative or absolute.
+        // Assuming DP's is moved to public/
+        const imgSrc = encodeURI(`/DP's/${name}.webp`);
+        return (
+          <a class="mate-card detail-link" href={`/mates/${encodedName}`}>
+            <img loading="lazy" class="mate-photo" src={imgSrc} alt={name} 
+                 onerror={`this.src='https://ui-avatars.com/api/?name=${encodedName}&background=1a3a28&color=f7f4ed&size=80'`} />
+            <div class="mate-name">{name}</div>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>

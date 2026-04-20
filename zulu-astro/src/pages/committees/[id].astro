@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { committeeData } from '../../data/committeeData.js';
+
+export function getStaticPaths() {
+  const committees = Object.values(committeeData);
+  return committees.map((c) => {
+    return {
+      params: { id: c.id },
+      props: { data: c }
+    };
+  });
+}
+
+const { data } = Astro.props;
+---
+
+<BaseLayout title={`${data.name} — Zulu Memories`}>
+  <div class="container" style="padding-top: 140px; min-height: 100vh;">
+    <div class="detail-container">
+      <div class="detail-header">
+        <h1 id="cName">{data.name}</h1>
+        <p id="cPeriod">{data.period}</p>
+      </div>
+
+      <div class="detail-section">
+        <h3>Members</h3>
+        <ul id="cMembers">
+          {data.members.map(member => (
+            <li>{member}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="detail-section">
+        <h3>Achievements</h3>
+        <p id="cAchievements">{data.achievements}</p>
+      </div>
+
+      <div class="detail-section">
+        <h3>Disadvantages</h3>
+        <p id="cDisadvantages">{data.disadvantages}</p>
+      </div>
+
+      <div class="detail-section">
+        <h3>Reason for Fall</h3>
+        <p id="cFallReason">{data.fallReason}</p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

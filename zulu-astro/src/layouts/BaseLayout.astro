@@ -1,0 +1,27 @@
+---
+import '../styles/act1_theme.css';
+import Sidebar from '../components/Sidebar.astro';
+import CustomCursor from '../components/CustomCursor.astro';
+
+const { title } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title || 'Zulu Memories — 2025–26'}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Exo+2:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <CustomCursor />
+  <Sidebar />
+  <div class="bg-glow"></div>
+  
+  <slot />
+
+  <script src="../scripts/transitions.js"></script>
+  <script src="../scripts/scrollReveal.js"></script>
+</body>
+</html>

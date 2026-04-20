@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { committeeData } from '../data/committeeData.js';
+
+const committees = Object.values(committeeData);
+---
+
+<BaseLayout title="Committees — Zulu Memories">
+  <div class="container" style="padding-top: 140px; min-height: 100vh;">
+    <div class="section-label">
+      <h2>Committees</h2>
+    </div>
+    <div class="committee-grid">
+      {committees.map((committee, index) => (
+        <a href={`/committees/${committee.id}`} class="committee-card">
+          <img loading="lazy" src={`https://picsum.photos/600/400?random=${200 + index}`} alt={committee.name} class="committee-photo" />
+          <div class="committee-card-body">
+            <h3 class="committee-title">{committee.name}</h3>
+            <span class="committee-period">{committee.period}</span>
+            <span class="committee-sec">{committee.members[0]}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

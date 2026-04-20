@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Chaos — Zulu Memories">
+  <header>
+    <div class="header-eyebrow">Unscripted Moments</div>
+    <h1>THE<br><em>Chaos</em></h1>
+    <p>The craziest moments, preserved.</p>
+  </header>
+
+  <div class="container">
+    <section class="images-section">
+      <div class="images-grid">
+        {[1, 2, 3, 4, 5, 6].map(i => (
+          <div class="image-card"><img loading="lazy" src={`https://picsum.photos/800/600?random=${100 + i}`} alt={`Chaos ${i}`} /></div>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

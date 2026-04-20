@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { mateNames } from '../../data/matesData.js';
+
+export function getStaticPaths() {
+  return mateNames.map((name, index) => {
+    return {
+      params: { name: name },
+      props: { index: index + 1, name: name }
+    };
+  });
+}
+
+const { name, index } = Astro.props;
+---
+
+<BaseLayout title={`${name} — Zulu Memories`}>
+  <div class="container" style="padding-top: 140px; min-height: 100vh;">
+    <div class="section-label">
+      <h2 id="galleryTitle">{name}</h2>
+    </div>
+    <div class="images-grid" id="dynamicGallery">
+      {[1, 2, 3, 4, 5, 6].map(i => (
+        <div class="image-card">
+          <img src={`https://picsum.photos/400/300?random=${index * 10 + i}`} alt={`${name} photo ${i}`} />
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
